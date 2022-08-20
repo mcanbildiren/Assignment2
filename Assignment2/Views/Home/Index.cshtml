@@ -1,0 +1,68 @@
+﻿@{
+	ViewData["Title"] = "Anasayfa";
+}
+
+@model List<PostViewModel>
+
+<div class="text-center">
+	<h1>Postlar</h1>
+</div>
+
+<div class="row">
+	@foreach (var item in Model)
+	{
+			<div class="card cards p-2">
+				<img src="" class="card-img-top" alt="">
+				<div class="card-body">
+					<h4 class="card-title title">@item.Title</h4>
+					<h5 class="card-title">@item.Category.Name</h5>
+					<p class="card-text text">
+						@item.Text
+					</p>
+					<a href="#" class="btn btn-primary">Devamını oku</a>
+				</div>
+			</div>
+	}
+</div>
+
+
+
+<div class="col-md-2 offset-5">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<li class="page-item">
+				<a class="page-link" href="#" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item">
+				<a class="page-link" href="#" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+
+<style>
+	.text {
+		width: 250px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	.title {
+		width: 250px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	.card {
+		width:18rem;
+	}
+</style>

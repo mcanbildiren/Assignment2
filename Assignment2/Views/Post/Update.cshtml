@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Update";
+}
+
+@model PostUpdateViewModel
+
+<form asp-controller="Post" asp-action="Update" method="post">
+	    <input type="hidden" asp-for="Id" />
+    <div>
+		<label asp-for="CategoryId" class="form-label">Kategori</label>
+		<select class="form-select" asp-items="@ViewBag.selectList" asp-for="CategoryId">
+		</select>
+	</div>
+
+	<div class="mb-3">
+		<label asp-for="Title" class="form-label">Başlık</label>
+		<input class="form-control" asp-for="Title">
+		<span class="text-danger" asp-validation-for="Title"></span>
+	</div>
+
+	<div class="mb-3">
+		<label asp-for="Text" class="form-label">İçerik</label>
+		<input class="form-control" asp-for="Text">
+		<span class="text-danger" asp-validation-for="Text"></span>
+	</div>
+
+
+	<div class="mb-3">
+		<label asp-for="Publisher" class="form-label">Yazar</label>
+		<input class="form-control" asp-for="Publisher">
+		<span class="text-danger" asp-validation-for="Publisher"></span>
+
+	</div>
+
+	<button type="submit" class="btn btn-primary">Güncelle</button>
+</form>
+
+@section Scripts
+    {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	}
