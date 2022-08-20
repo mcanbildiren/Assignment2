@@ -1,11 +1,15 @@
-﻿
-@{
-    ViewData["Title"] = "Admin Paneli";
+﻿@{
+	ViewData["Title"] = "Admin Paneli";
 }
 
 @model List<PostViewModel>
 
-	<table class="table">
+<div class="text-center">
+	<h1>Admin Paneli</h1>
+	<a asp-controller="Post" asp-action="Create" class="btn btn-primary">Yeni Post Ekle</a>
+</div>
+
+<table class="table">
 	<thead>
 		<tr>
 			<th>Başlık</th>
@@ -25,65 +29,13 @@
 				<td>@item.Publisher</td>
 				<td>@item.Category.Name</td>
 				<td>
-					<a asp-controller="Post" asp-action="Update" asp-route-id="@item.Id">Güncelle</a>
+					<a class="btn btn-primary" asp-controller="Post" asp-action="Update" asp-route-id="@item.Id">Güncelle</a>
 				</td>
-				<td>					
-                    <a asp-controller="Post" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+				<td>
+					<a class="btn btn-danger" asp-controller="Post" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
 				</td>
 			</tr>
 		}
 	</tbody>
 </table>
-
-
-<div class="text-center">
-    <h1>Admin Paneli</h1>
-    <a asp-controller="Post" asp-action="Create" class="btn btn-primary">Yeni Post Ekle</a>
-</div>
-<div>
-	<table class="table table-borderless">
-		<tbody>
-			<tr>
-				@foreach (var item in Model)												
-				{
-					<td>
-						<div class="card" style="width: 18rem; margin:auto;">
-							<img src="" class="card-img-top" alt="">
-							<div class="card-body">
-								<h4 class="card-title">@item.Title</h4>
-								<h5 class="card-title">@item.Category.Name</h5>
-								<p class="card-text">
-									@item.Text
-								</p>
-								<a href="#" class="btn btn-primary">Devamını oku</a>
-							</div>
-						</div>
-					</td>
-				}
-			</tr>
-		</tbody>
-	</table>
-</div>
-
-
-
-<div class="col-md-2 offset-5" style="margin-top:20px;">
-	<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-</div>
 
