@@ -2,6 +2,7 @@ using System.Reflection;
 using Assignment2.Models;
 using Assignment2.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ builder.Services.AddDbContext<Assignment2DbContext>(options =>
     options.UseSqlServer(builder.Configuration["DatabaseSqlCon"]);
 
 });
+
+builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
 
 var app = builder.Build();
 

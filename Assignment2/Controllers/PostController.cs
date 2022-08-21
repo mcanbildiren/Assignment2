@@ -4,6 +4,7 @@ using Assignment2.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.FileProviders;
 
 namespace Assignment2.Controllers
 {
@@ -11,11 +12,13 @@ namespace Assignment2.Controllers
     {
         private readonly IPostRepository _postRepository;
         private readonly IMapper _mapper;
+        private readonly IFileProvider _fileProvider;
 
-        public PostController(IPostRepository postRepository, IMapper mapper)
+        public PostController(IPostRepository postRepository, IMapper mapper, IFileProvider fileProvider)
         {
             _postRepository = postRepository;
             _mapper = mapper;
+            _fileProvider = fileProvider;
         }
 
         [HttpGet]
@@ -84,6 +87,28 @@ namespace Assignment2.Controllers
         {
             _postRepository.Delete(id);
             return RedirectToAction("AdminDashboard", "Post");
+        }
+
+        [HttpGet]
+        public IActionResult PhotoSave()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PhotoSave(IFormFile photo)
+        {
+            if (photo != null && photo.Length > 0)
+            {
+                var root = _fileProvider.GetDirectoryContents("wwwroot");
+                var picturesDirectory = root.Single(x => x.Name == "Pictures");
+
+                var path = Path.Combine(picturesDirectory.PhysicalPath, photo.FileName);
+
+                using var stream = new FileStream(path, FileMode.Create);
+                await photo.CopyToAsync(stream);
+            }
+            return View();
         }
     }
 }
