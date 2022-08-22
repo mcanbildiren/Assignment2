@@ -32,23 +32,20 @@
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
 
-			<li class="page-item">
-				<a class="page-link" href="#" aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span>
-				</a>
+			<li class="page-item @(ViewBag.page == 1 ? "disabled":"")">
+				<a class="page-link" asp-controller="Home" asp-action="Index" asp-route-page="@(ViewBag.page - 1)">Previous</a>
 			</li>
 
-			@foreach (var item in Model)
+			@for (int i = 1; i <= @ViewBag.totalPage; i++)
 			{
+				
 				<li class="page-item">
-					<a asp-controller="Post" asp-action="PostListWithPaging" asp-route-page="1" asp-route-pageSize="2" class="page-link">1</a>
+					<a asp-controller="Home" asp-action="Index" asp-route-page="@i" class="page-link">@i</a>
 				</li>
 			}
 
-			<li class="page-item">
-				<a class="page-link" href="#" aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
-				</a>
+			<li class="page-item @(ViewBag.page == ViewBag.totalPage ? "disabled":"")">
+				<a class="page-link" asp-controller="Home" asp-action="Index" asp-route-page="@(ViewBag.page + 1)">Next</a>
 			</li>
 
 		</ul>

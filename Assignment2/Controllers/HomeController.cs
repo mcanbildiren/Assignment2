@@ -18,9 +18,14 @@ namespace Assignment2.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page =1 )
         {
-            var postList = _mapper.Map<List<PostViewModel>>(_postRepository.GetAll());
+            var pageSize = 3;
+            var postList = _mapper.Map<List<PostViewModel>>(_postRepository.GetPostsWithPaged(page,pageSize).Item1);
+            var totalCount = _postRepository.GetPostsWithPaged(page, pageSize).Item2;
+            int totalPage = (int)Math.Ceiling((decimal)totalCount / pageSize);
+            ViewBag.totalPage = totalPage;
+            ViewBag.page = page;
             return View(postList);
         }
 

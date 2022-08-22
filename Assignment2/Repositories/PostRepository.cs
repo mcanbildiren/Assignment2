@@ -44,10 +44,10 @@ namespace Assignment2.Repositories
         }
         public (List<Post>, int) GetPostsWithPaged(int page, int pageSize)
         {
-            var post = _context.Posts.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            var totalCount = _context.Posts.Count();
-
-            return (post, totalCount);
+            var posts = GetAll();
+            int totalCount = posts.Count;
+            var ListedPosts = posts.Skip(pageSize * (page - 1)).Take(pageSize).ToList();
+            return (ListedPosts, totalCount);
         }
     }
 }
