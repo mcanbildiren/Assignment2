@@ -41,5 +41,13 @@ namespace Assignment2.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet]
+        public IActionResult DetailedPage(int id)
+        {
+
+            var post = _mapper.Map<PostViewModel>(_postRepository.GetById(id));
+            return View(post);
+        }
     }
 }

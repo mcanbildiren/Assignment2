@@ -42,5 +42,12 @@ namespace Assignment2.Repositories
             _context.Posts.Remove(post);
             _context.SaveChanges();
         }
+        public (List<Post>, int) GetPostsWithPaged(int page, int pageSize)
+        {
+            var post = _context.Posts.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var totalCount = _context.Posts.Count();
+
+            return (post, totalCount);
+        }
     }
 }

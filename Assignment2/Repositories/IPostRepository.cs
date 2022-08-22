@@ -10,5 +10,6 @@ namespace Assignment2.Repositories
         void Update(Post post);
         Post GetById(int id);
         void Delete(int id);
+        (List<Post>,int) GetPostsWithPaged(int page, int pageSize);
     }
 }

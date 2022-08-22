@@ -8,5 +8,7 @@
         public string Publisher { get; set; }
         public int? CategoryId { get; set; }
         public CategoryViewModel Category { get; set; }
+
+        public string Photo { get; set; }
     }
 }

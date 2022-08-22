@@ -4,7 +4,7 @@
 
 @model PostCreateViewModel
 
-<form asp-controller="Post" asp-action="Create" method="post">
+<form asp-controller="Post" asp-action="Create" method="post" enctype="multipart/form-data">
 	<div>
 		<label asp-for="CategoryId" class="form-label">Kategori</label>
 		<select class="form-select" asp-items="@ViewBag.selectList" asp-for="CategoryId">
@@ -28,10 +28,10 @@
 		<input class="form-control" asp-for="Publisher">
 		<span class="text-danger" asp-validation-for="Publisher"></span>
 	</div>
+
 	<div class="mb-3">
-		<label asp-for="Publisher" class="form-label">Yazar</label>
-		<input class="form-control" asp-for="Publisher">
-		<span class="text-danger" asp-validation-for="Publisher"></span>
+		<label asp-for="Photo" class="form-label">Foto</label>
+		<input class="form-control" type="file" asp-for="Photo">
 	</div>
 
 	<button type="submit" class="btn btn-primary">Post Oluştur</button>

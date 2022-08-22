@@ -49,7 +49,13 @@ namespace Assignment2.Controllers
 
                 return View(request);
             }
+
+            PhotoSave(request.Photo);
+
+            var fileName = request.Photo.FileName;
+
             var newPost = _mapper.Map<Post>(request);
+            newPost.Photo = fileName;
             _postRepository.Create(newPost);
             return RedirectToAction("AdminDashboard", "Post");
         }
@@ -90,13 +96,25 @@ namespace Assignment2.Controllers
         }
 
         [HttpGet]
+        public IActionResult PostListWithPaging(int page, int pageSize)
+        {
+            ViewBag.Page = page;
+
+            var postWithPaged = _postRepository.GetAll().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var totalCount = _postRepository.GetAll().Count;
+
+            return View((postWithPaged, totalCount));
+        }
+
+        [HttpGet]
         public IActionResult PhotoSave()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> PhotoSave(IFormFile photo)
+        public async void  PhotoSave(IFormFile photo)
         {
             if (photo != null && photo.Length > 0)
             {
@@ -108,7 +126,6 @@ namespace Assignment2.Controllers
                 using var stream = new FileStream(path, FileMode.Create);
                 await photo.CopyToAsync(stream);
             }
-            return View();
         }
     }
 }

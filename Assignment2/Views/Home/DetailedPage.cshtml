@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "DetailedPage";
+}
+
+@model PostViewModel
+
+<div class="text-center">
+    <h1>@Model.Title</h1>
+    <h5>Yazan: @Model.Publisher</h5>
+</div>
+
+
+<div class="col-md-8 offset-2 text-center">
+    <p>@Model.Text</p>
+</div>
+
