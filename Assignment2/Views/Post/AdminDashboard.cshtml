@@ -42,19 +42,23 @@
 <div class="col-md-2 offset-5">
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
-			<li class="page-item">
-				<a class="page-link" href="#" aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span>
-				</a>
+
+			<li class="page-item @(ViewBag.page == 1 ? "disabled":"")">
+				<a class="page-link" asp-controller="Post" asp-action="AdminDashboard" asp-route-page="@(ViewBag.page - 1)">Previous</a>
 			</li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item">
-				<a class="page-link" href="#" aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
-				</a>
+
+			@for (int i = 1; i <= @ViewBag.totalPage; i++)
+			{
+				
+				<li class="page-item">
+					<a asp-controller="Post" asp-action="AdminDashboard" asp-route-page="@i" class="page-link">@i</a>
+				</li>
+			}
+
+			<li class="page-item @(ViewBag.page == ViewBag.totalPage ? "disabled":"")">
+				<a class="page-link" asp-controller="Post" asp-action="AdminDashboard" asp-route-page="@(ViewBag.page + 1)">Next</a>
 			</li>
+
 		</ul>
 	</nav>
 </div>

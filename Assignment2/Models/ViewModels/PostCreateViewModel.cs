@@ -18,6 +18,6 @@ namespace Assignment2.Models.ViewModels
         [Required(ErrorMessage = "Kategori boş bırakılamaz!")]
         public int? CategoryId { get; set; }
 
-        public IFormFile Photo { get; set; }
+        public IFormFile? Photo { get; set; }
     }
 }

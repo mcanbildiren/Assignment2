@@ -22,9 +22,14 @@ namespace Assignment2.Controllers
         }
 
         [HttpGet]
-        public IActionResult AdminDashboard()
+        public IActionResult AdminDashboard(int page = 1)
         {
-            var postList = _mapper.Map<List<PostViewModel>>(_postRepository.GetAll());
+            var pageSize = 5;
+            var postList = _mapper.Map<List<PostViewModel>>(_postRepository.GetPostsWithPaged(page, pageSize).Item1);
+            var totalCount = _postRepository.GetPostsWithPaged(page, pageSize).Item2;
+            int totalPage = (int)Math.Ceiling((decimal)totalCount / pageSize);
+            ViewBag.totalPage = totalPage;
+            ViewBag.page = page;
             return View(postList);
         }
 
